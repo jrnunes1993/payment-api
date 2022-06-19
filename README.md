@@ -9,3 +9,5 @@ composer install
 php artisan serve
 ```
 
+API PagSeguro
+  https://dev.pagseguro.uol.com.br/reference/pagseguro-reference-intro

@@ -20,7 +20,7 @@ services:
     environment:
         - PMA_ARBITRARY=1
     links:
-        -   mysql
+        - mysql
 
   web:
       image: nginx:latest
@@ -32,12 +32,23 @@ services:
           - ./site.conf:/etc/nginx/conf.d/site.conf
       links:
           - php
+
   php:
       container_name: php-fpm
       build: .
       volumes:
           - ./:/www
-      command: bash -c "cd /www; chmod 777 -R storage; cp .env.example .env; php artisan migrate; php artisan key:generate"
+      command: bash -c "cd /www; chmod 777 -R storage; cp .env.example .env; php artisan key:generate; php artisan migrate"
       links:
           - mysql
+      depends_on:
+          - mysql
+
+  phpqa:
+      image: jakzal/phpqa:php7.4
+      container_name: phpqa
+      volumes:
+          - ./:/www
+      working_dir: /www
+      command: bash -c "composer install"            
 
