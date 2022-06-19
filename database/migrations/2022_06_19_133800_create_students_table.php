@@ -17,13 +17,16 @@ class CreateStudentsTable extends Migration
             $table->id();
             $table->string('name', 100);
             $table->string('email', 50);
-            $table->enum('status', ['Registered', 'Locked', 'Canceled']);
+            $table->enum('status', ['Registered', 'Locked', 'Canceled'])->default('Registered');
             $table->string('document',50);
             $table->string('phoneNumber', 50);
             $table->string('country', 50);
             $table->string('city', 50);
             $table->string('street', 50);
-            $table->string('state', 50);
+            $table->integer('number');
+            $table->string('locality', 50);
+            $table->string('state', 2);
+            $table->string('postalCode', 30);
             $table->timestamps();
         });
     }

@@ -1,0 +1,43 @@
+version: '3.1'
+
+services:
+
+  mysql:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: api
+      MYSQL_USER: api
+      MYSQL_PASSWORD: mudar123
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+        - '127.0.0.1:8080:80'
+    environment:
+        - PMA_ARBITRARY=1
+    links:
+        -   mysql
+
+  web:
+      image: nginx:latest
+      restart: always
+      ports:
+          - "127.0.0.1:80:80"
+      volumes:
+          - ./:/www
+          - ./site.conf:/etc/nginx/conf.d/site.conf
+      links:
+          - php
+  php:
+      container_name: php-fpm
+      build: .
+      volumes:
+          - ./:/www
+      command: bash -c "cd /www; chmod 777 -R storage; cp .env.example .env; php artisan migrate; php artisan key:generate"
+      links:
+          - mysql
+
