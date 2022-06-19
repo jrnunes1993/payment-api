@@ -26,7 +26,7 @@ Route::get('/', function () {
         'store_code' => 1234,
         'username' => 'teste',
         'password' => 'teste',
-        'endpoint' => 'https://sandbox.gateway.yapay.com.br/checkout/api/v3/transacao',
+        'endpoint' => 'https://api.intermediador.sandbox.yapay.com.br/api/v3/charges',
         'transaction_number' => 1234,
         'transaction_value' => 1598,
         'transaction_installments' => 5,
