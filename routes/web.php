@@ -1,7 +1,7 @@
 <?php
 
+use App\Helpers\StringHelper;
 use Illuminate\Support\Facades\Route;
-use Rockbuzz\SDKYapay\PaymentCreditCardFactory;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,5 +21,6 @@ use Rockbuzz\SDKYapay\PaymentCreditCardFactory;
  * Exemplo de consumo em: https://github.com/rockbuzz/sdk-yapay
  */
 Route::get('/', function () {
-    echo 'foi';
+    echo 'foi, ';
+    echo StringHelper::random(['Registered', 'Locked', 'Canceled']);
 });
