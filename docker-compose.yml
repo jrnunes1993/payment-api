@@ -3,6 +3,7 @@ version: '3.1'
 services:
 
   mysql:
+    container_name: db-mysql
     image: mysql:5.7
     command: --default-authentication-plugin=mysql_native_password
     restart: always
@@ -11,12 +12,14 @@ services:
       MYSQL_DATABASE: api
       MYSQL_USER: api
       MYSQL_PASSWORD: mudar123
-#    healthcheck:
-#        test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-#        timeout: 20s
-#        retries: 10
+    healthcheck:
+        test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+        timeout: 20s
+        interval: 10s
+        retries: 10
 
   phpmyadmin:
+    container_name: php-myadmin
     image: phpmyadmin
     restart: always
     ports:
@@ -27,6 +30,7 @@ services:
         - mysql
 
   web:
+      container_name: nginx
       image: nginx:latest
       restart: always
       ports:
@@ -42,17 +46,16 @@ services:
       build: .
       volumes:
           - ./:/www
-#      command: bash -c "sleep 30; cd /www; chmod 777 -R storage; php artisan key:generate; php artisan migrate;"
-#      command: bash -c "cd /www; chmod 777 -R storage; php artisan key:generate; php artisan migrate;"      
+#      command: bash -c "chmod 777 -R storage; php artisan key:generate; php artisan migrate;"      
+      depends_on:
+          - mysql
+      restart: on-failure
       links:
           - mysql
-#      depends_on:
-#          - mysql
-#              condition: service_healthy
 
   phpqa:
+      container_name: composer-install 
       image: jakzal/phpqa:php7.4
-      container_name: phpqa
       volumes:
           - ./:/www
       working_dir: /www
