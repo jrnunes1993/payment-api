@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\StringHelper;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,8 @@ use Illuminate\Support\Facades\Route;
  * Exemplo de consumo em: https://github.com/rockbuzz/sdk-yapay
  */
 Route::get('/', function () {
-    echo 'foi, ';
-    echo StringHelper::random(['Registered', 'Locked', 'Canceled']);
+    return view('welcome');
 });
+
+Route::get('students', [StudentController::class, 'index']);
+
