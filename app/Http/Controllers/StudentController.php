@@ -8,7 +8,6 @@ class StudentController extends Controller
 {
     public function index()
     {
-        //return view('welcome');
-        echo "mas ahhh";
+        return view('students.list');
     }
 }

@@ -27,7 +27,7 @@ class StudentFactory extends Factory
             'number' => random_int(1, 9999),
             'locality' => 'Rio Grande do Sul',
             'state' => 'RS',
-            'postalCode' => $this->faker->unique()->postcode(),
+            'postalCode' => $this->faker->unique()->numerify('#####-###'),
         ];
     }
 }

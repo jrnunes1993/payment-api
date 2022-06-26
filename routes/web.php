@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
  * Exemplo de consumo em: https://github.com/rockbuzz/sdk-yapay
  */
 Route::get('/', function () {
-    return view('welcome');
+    echo "Laravel funcionando";
 });
 
 Route::get('students', [StudentController::class, 'index']);
