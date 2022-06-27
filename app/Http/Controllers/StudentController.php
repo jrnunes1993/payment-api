@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\CountryStates;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -43,7 +44,11 @@ class StudentController extends Controller
 
     public function view($id){
         $student = Student::find($id);
-        return view('students.view', ['data' => $student]);
+        return view('students.view', [
+            'data' => $student, 
+            'states' => CountryStates::getStates(), 
+            'postals' => CountryStates::getPostals()
+        ]);
     }
 
 }

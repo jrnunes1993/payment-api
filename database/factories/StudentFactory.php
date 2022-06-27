@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Helpers\CountryStates;
 use App\Helpers\StringHelper;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -25,8 +26,8 @@ class StudentFactory extends Factory
             'city' => $this->faker->unique()->city(),
             'street' => $this->faker->unique()->streetName(),
             'number' => random_int(1, 9999),
-            'locality' => 'Rio Grande do Sul',
-            'state' => 'RS',
+            'locality' => 'Bairro Centro',
+            'state' => StringHelper::random(CountryStates::getPostals()),
             'postalCode' => $this->faker->unique()->numerify('#####-###'),
         ];
     }
