@@ -13,4 +13,14 @@ class Student extends Model
     {
         return $this->hasMany(Charge::class);
     }
+
+    public function getStatusStr() {
+        $val = [
+            'Registered' => 'Registrado', 
+            'Locked' => 'Trancado', 
+            'Canceled' => 'Cancelado'
+        ];
+
+        return $val[$this->status];
+    }
 }
