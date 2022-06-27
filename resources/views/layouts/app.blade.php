@@ -57,7 +57,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="/students">Listar Estudantes</a></li>
-                                <li><a class="dropdown-item" href="#">Cadastro</a></li>
+                                <li><a class="dropdown-item" href="/students/0">Novo Cadastro</a></li>
                                 <li><a class="dropdown-item" href="#">Cobrança</a></li>
                             </ul>
                         </li>
