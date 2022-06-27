@@ -14,3 +14,6 @@ php artisan db:seed => Vai gerar 2 registros para a tabela User e 10 para a tabe
 
 API PagSeguro
   https://dev.pagseguro.uol.com.br/reference/pagseguro-reference-intro
+
+Bootstrap
+  https://getbootstrap.com/docs/5.2/components/navbar/
