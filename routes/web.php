@@ -28,11 +28,6 @@ Route::get('/', [MainController::class, 'index']);
 //     echo 'Versão Laravel: ' . app()->version();
 // });
 
-Route::get('students', [StudentController::class, 'index']);
-
-Route::get('test', [StudentController::class, 'index'])->name('student.index');
-
-Route::get('/welcome', function() {
-  return view('welcome');
-});
+Route::get('students', [StudentController::class, 'index'])->name('student.index');
+Route::get('db', [StudentController::class, 'db'])->name('db.index');
 

@@ -35,6 +35,28 @@ class StudentController extends Controller
                     ->make(true);
         }
         
+        return view('students.list');
+    }
+
+    public function db(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Student::all();
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                        $btn = '<div class="center"><a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Editar</a></div>';
+                        return $btn;
+                    })
+                    ->addColumn('statusStr', function($row){
+                        $status = $row->getStatusStr();
+                        return $status;
+
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+        
         return view('students.datatable');
     }
 
