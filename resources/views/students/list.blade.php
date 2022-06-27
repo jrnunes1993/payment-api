@@ -16,7 +16,11 @@
           <th>Nome</th>
           <th>E-Mail</th>
           <th>Situação</th>
-          <th></th>
+          <th>
+            <div class="center">
+              <a href="/students/0" class="edit btn btn-primary btn-sm">Novo</a>
+            </div>
+          </th>
         </tr>
       </thead>
       <tbody>

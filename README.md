@@ -16,4 +16,4 @@ API PagSeguro
   https://dev.pagseguro.uol.com.br/reference/pagseguro-reference-intro
 
 Bootstrap
-  https://getbootstrap.com/docs/5.2/components/navbar/
+  https://getbootstrap.com/docs/4.6/components/alerts/

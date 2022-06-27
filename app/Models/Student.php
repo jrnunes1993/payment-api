@@ -9,6 +9,8 @@ class Student extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['state', 'country'];
+
     public function charges()
     {
         return $this->hasMany(Charge::class);

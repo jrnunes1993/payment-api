@@ -2,6 +2,7 @@
 
 @php
   $title = "Cadastro de Estudantes";
+  $message = session('message');
 @endphp
 
 @include('partials.head', ['title' => $title])
@@ -9,7 +10,15 @@
 @section('content')
   <div>
     <h3>{{$title}}</h3>
-    <form name="student-view-form" id="student-view-form" method="post" action="{{url('store-form')}}">
+    @if( session('message') )
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('message') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    @endif
+    <form name="student-view-form" id="student-view-form" method="post" action="store">
       @csrf
       <div class="container">
         <div class="row">
@@ -113,11 +122,18 @@
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="row">
+          <div class="col">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+          </div>  
+          <div class="col" style="text-align: end;">
+            <a href="/students" class="btn btn-warning">Voltar</a>
+          </div>
+        </div>  
       </div>
     </form>
-
   </div>
+</div>  
   
 @endsection
 

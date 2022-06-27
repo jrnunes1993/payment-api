@@ -9,12 +9,6 @@ use Yajra\DataTables\DataTables;
 
 class StudentController extends Controller
 {
-    // public function index()
-    // {
-    //     $students = Student::all();
-    //     return view('students.list', ['data' => $students]);
-    // }
-
     /**
      * Display a listing of the resource.
      *
@@ -44,11 +38,45 @@ class StudentController extends Controller
 
     public function view($id){
         $student = Student::find($id);
+        if ($student == null) {
+            $student = new Student([
+                'state' => 'RS',
+                'country' => 'Brasil',
+                ''
+            ]);
+        }
         return view('students.view', [
             'data' => $student, 
             'states' => CountryStates::getStates(), 
             'postals' => CountryStates::getPostals()
         ]);
+    }
+
+    public function store(Request $request){
+        if ($request->id == 0) {
+            $data = new Student;
+            $message = 'adicionado';
+        } else {
+            $data = Student::find($request->id);
+            $message = 'atualizado';
+        }
+        
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->status = $request->status;
+        $data->document = $request->document;
+        $data->phoneNumber = $request->phoneNumber;
+        $data->country = $request->country;
+        $data->city = $request->city;
+        $data->street = $request->street;
+        $data->number = $request->number;
+        $data->locality = $request->locality;
+        $data->state = $request->state;
+        $data->postalCode = $request->postalCode;
+
+        $data->save();
+
+        return redirect('students/' . $data->id)->with('message', "Registro de Estudante $message com sucesso.");
     }
 
 }

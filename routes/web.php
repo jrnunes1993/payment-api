@@ -30,3 +30,4 @@ Route::get('/', [MainController::class, 'index']);
 
 Route::get('students', [StudentController::class, 'index'])->name('student.index');
 Route::get('students/{post}', [StudentController::class, 'view']);
+Route::post('students/store', [StudentController::class, 'store']);
