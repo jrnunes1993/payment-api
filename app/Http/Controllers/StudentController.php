@@ -26,26 +26,7 @@ class StudentController extends Controller
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-     
-                           $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-    
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
-        
-        return view('students.list');
-    }
-
-    public function db(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = Student::all();
-            return DataTables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-                        $btn = '<div class="center"><a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Editar</a></div>';
+                        $btn = '<div class="center"><a href="/students/' . $row->id . '" class="edit btn btn-primary btn-sm">Editar</a></div>';
                         return $btn;
                     })
                     ->addColumn('statusStr', function($row){
@@ -57,7 +38,12 @@ class StudentController extends Controller
                     ->make(true);
         }
         
-        return view('students.datatable');
+        return view('students.list');
+    }
+
+    public function view($id){
+        $student = Student::find($id);
+        return view('students.view', ['data' => $student]);
     }
 
 }

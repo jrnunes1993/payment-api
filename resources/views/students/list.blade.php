@@ -32,7 +32,7 @@
         language: {
             "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
         },
-        ajax: "{{ route('db.index') }}",
+        ajax: "{{ route('student.index') }}",
         columns: [
             {data: 'id', name: 'id'},
             {data: 'name', name: 'name'},

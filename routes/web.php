@@ -29,5 +29,4 @@ Route::get('/', [MainController::class, 'index']);
 // });
 
 Route::get('students', [StudentController::class, 'index'])->name('student.index');
-Route::get('db', [StudentController::class, 'db'])->name('db.index');
-
+Route::get('students/{post}', [StudentController::class, 'view']);
