@@ -30,3 +30,9 @@ Route::get('/', [MainController::class, 'index']);
 
 Route::get('students', [StudentController::class, 'index']);
 
+Route::get('test', [StudentController::class, 'index'])->name('student.index');
+
+Route::get('/welcome', function() {
+  return view('welcome');
+});
+

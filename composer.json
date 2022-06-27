@@ -13,7 +13,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "pagseguro/pagseguro-php-sdk": "^6.0",
-        "rockbuzz/sdk-yapay": "^2.0"
+        "rockbuzz/sdk-yapay": "^2.0",
+        "yajra/laravel-datatables-oracle": "^9.21.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
