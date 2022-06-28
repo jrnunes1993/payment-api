@@ -124,11 +124,11 @@
 
         <div class="row">
           <div class="col">
+            <a href="/students" class="btn btn-warning">Voltar</a>
+          </div>          
+          <div class="col" style="text-align: end;">
             <button type="submit" class="btn btn-primary">Salvar</button>
           </div>  
-          <div class="col" style="text-align: end;">
-            <a href="/students" class="btn btn-warning">Voltar</a>
-          </div>
         </div>  
       </div>
     </form>
