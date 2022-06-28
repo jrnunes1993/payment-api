@@ -29,8 +29,8 @@
   </div>
 
   <script type="text/javascript">
-  $(function () {    
-    var table = $('.data-table').DataTable({
+    $(function () {    
+      var table = $('.data-table').DataTable({
         // processing: true,
         serverSide: true,
         language: {

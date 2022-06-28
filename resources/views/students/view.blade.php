@@ -132,6 +132,12 @@
         </div>  
       </div>
     </form>
+    @if ($data->id) > 0)
+      <div id="sub-grid" class="container">
+        <hr>
+        @include('partials.chargelist', ['caption' => 'Lista de Cobranças para o ' . $data->name])
+      </div>
+    @endif
   </div>
 </div>  
   
