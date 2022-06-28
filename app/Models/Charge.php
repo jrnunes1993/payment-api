@@ -11,6 +11,27 @@ class Charge extends Model
 
     public function student()
     {
-        return $this->hasOne(Student::class);
+        //return $this->hasOne(Student::class);
+        return Student::find($this->studentId);
+    }
+
+    public function getStatusStr() {
+        $val = [
+            'Paid'     => 'Pago', 
+            'Pending'  => 'Pendente', 
+            'Canceled' => 'Cancelado'
+        ];
+
+        return $val[$this->status];
+    }
+
+    public function getTypeStr() {
+        $val = [
+            'creditCard' => 'Cartão Crédito', 
+            'debitCard'  => 'Cartão Débito', 
+            'bankSlip'   => 'Boleto'
+        ];
+
+        return $val[$this->type];
     }
 }

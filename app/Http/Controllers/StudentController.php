@@ -36,13 +36,12 @@ class StudentController extends Controller
         return view('students.list');
     }
 
-    public function view($id){
-        $student = Student::find($id);
+    public function view($studentId){
+        $student = Student::find($studentId);
         if ($student == null) {
             $student = new Student([
                 'state' => 'RS',
                 'country' => 'Brasil',
-                ''
             ]);
         }
         return view('students.view', [

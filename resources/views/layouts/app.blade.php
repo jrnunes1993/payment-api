@@ -58,7 +58,15 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="/students">Listar Estudantes</a></li>
                                 <li><a class="dropdown-item" href="/students/0">Novo Cadastro</a></li>
-                                <li><a class="dropdown-item" href="#">Cobrança</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Cobranças
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="/charges">Listar Cobranças</a></li>
+                                <li><a class="dropdown-item" href="#">Nova Cobrança</a></li>
                             </ul>
                         </li>
                     </ul>
