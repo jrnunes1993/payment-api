@@ -8,6 +8,6 @@
 
 @section('content')
 
-  @include('partials.chargelist', ['caption' => $title])
+  @include('partials.chargelist', ['caption' => $title, 'studentId' => 0])
 
 @endsection

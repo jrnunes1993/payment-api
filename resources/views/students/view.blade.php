@@ -127,15 +127,15 @@
             <a href="/students" class="btn btn-warning">Voltar</a>
           </div>          
           <div class="col" style="text-align: end;">
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-success">Salvar</button>
           </div>  
         </div>  
       </div>
     </form>
-    @if ($data->id) > 0)
+    @if ($data->id > 0)
       <div id="sub-grid" class="container">
         <hr>
-        @include('partials.chargelist', ['caption' => 'Lista de Cobranças para o ' . $data->name])
+        @include('partials.chargelist', ['caption' => 'Lista de Cobranças para ' . $data->name, 'studentId' => $data->id])
       </div>
     @endif
   </div>

@@ -23,14 +23,14 @@
 </div>
 
 <script type="text/javascript">
-  $(function () {    
+  $(function () {
     var table = $('.data-table').DataTable({
       // processing: true,
       serverSide: true,
       language: {
           "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
       },
-      ajax: "{{ route('charge.index') }}",
+      ajax: "{{ route('charge.datatable', ['studentId' => $studentId]) }}",
       columns: [
           {data: 'id', name: 'id'},
           {data: 'studentId', name: 'studentId'},

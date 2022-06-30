@@ -9,10 +9,15 @@ use Yajra\DataTables\DataTables;
 
 class ChargeController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, int $studentId = 0)
     {
         if ($request->ajax()) {
-            $data = Charge::all();
+            if ($studentId == 0) {
+                $data = Charge::all();
+            } else {
+                $data = Charge::where('studentId', $studentId);
+            }
+            
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){

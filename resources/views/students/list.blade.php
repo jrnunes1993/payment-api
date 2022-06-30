@@ -18,7 +18,7 @@
           <th>Situação</th>
           <th>
             <div class="center">
-              <a href="/students/0" class="edit btn btn-primary btn-sm">Novo</a>
+              <a href="/students/0" class="edit btn btn-success btn-sm">Novo</a>
             </div>
           </th>
         </tr>
