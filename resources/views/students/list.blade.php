@@ -29,7 +29,7 @@
   </div>
 
   <script type="text/javascript">
-    $(function () {    
+    $(function () {
       var table = $('.data-table').DataTable({
         // processing: true,
         serverSide: true,
@@ -47,7 +47,7 @@
     });
   });
 </script>
-  
+
 @endsection
 
 

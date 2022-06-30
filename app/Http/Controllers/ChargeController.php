@@ -17,11 +17,11 @@ class ChargeController extends Controller
             } else {
                 $data = Charge::where('studentId', $studentId);
             }
-            
+
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<div class="center"><a href="/students/' . $row->id . '" class="edit btn btn-primary btn-sm">Editar</a></div>';
+                        $btn = '<div class="center"><a href="/charges/form/' . $row->id . '" class="edit btn btn-primary btn-sm">Editar</a></div>';
                         return $btn;
                     })
                     ->addColumn('statusStr', function($row){
@@ -42,7 +42,7 @@ class ChargeController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        
+
         return view('charges.list');
     }
 }

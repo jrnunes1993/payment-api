@@ -19,7 +19,7 @@ class CreateChargesTable extends Migration
             $table->integer('studentId');
             //$table->foreign('studentId')->references('id')->on('students');
             $table->enum('status', ['Paid', 'Pending', 'Canceled'])->default('Pending');
-            $table->string('referenceId', 100);
+            $table->string('referenceId', 100)->nullable();
             $table->enum('type', ['creditCard', 'debitCard', 'bankSlip']);
             $table->dateTime('dueDate');
             $table->dateTime('paidedAt')->nullable()->default(NULL);
