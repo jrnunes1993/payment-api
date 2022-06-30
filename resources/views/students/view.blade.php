@@ -61,7 +61,7 @@
                 <div class="col">
                     <div class="form-group">
                         <label for="name">Situação*</label>
-                        <select id="status" name="status" class="form-select" aria-label="Default select example">
+                        <select id="status" name="status" class="form-select" aria-label="Informe a Situação">
                             <option value="Registered" {{ $data->status == 'Registered' ? 'selected' : '' }}>Registrado</option>
                             <option value="Locked" {{ $data->status == 'Locked' ? 'selected' : '' }}>Trancado</option>
                             <option value="Canceled" {{ $data->status == 'Canceled' ? 'selected' : '' }}>Cancelado</option>
@@ -80,9 +80,10 @@
                 <div class="col">
                     <div class="form-group">
                         <label for="id">Estado*</label>
-                        <select id="state" name="state" class="form-select" aria-label="Default select example">
-                            @for ($i = 0; $i < 27; $i++) <option value="{{$postals[$i]}}" {{ $data->state == $postals[$i] ? 'selected' : '' }}>{{ $states[$i] }}</option>
-                                @endfor
+                        <select id="state" name="state" class="form-select" aria-label="Informe o Estado">
+                            @for ($i = 0; $i < 27; $i++)
+                                <option value="{{$postals[$i]}}" {{ $data->state == $postals[$i] ? 'selected' : '' }}>{{ $states[$i] }}</option>
+                            @endfor
                         </select>
                     </div>
                 </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\NumberHelper;
 use App\Helpers\StringHelper;
 use App\Models\Charge;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -38,7 +39,13 @@ class ChargeController extends Controller
                     return $name;
                 })
                 ->addColumn('valueFmt', function ($row) {
-                    return NumberHelper::formatNumber($row->value);
+                    return $row->getValue();
+                })
+                ->addColumn('dueDateFmt', function ($row) {
+                    return $row->getDueDate();
+                })
+                ->addColumn('paidedAtFmt', function ($row) {
+                    return $row->getPaidedAt();
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -55,11 +62,18 @@ class ChargeController extends Controller
                 'studentId' => 1,
                 'status' => 'Pending',
             ]);
+            $student = new Student();
+        } else {
+            $student = $charge->student();
         }
+
         return view('charges.view', [
             'data'          => $charge,
-            'paimentType'   => StringHelper::getPaymentTypeList(),
-            'paimentStatus' => StringHelper::getPaimentStatusList(),
+            'studentData'   => $student,
+            'paimentTypeKey'   => array_keys(StringHelper::getPaymentTypeList()),
+            'paimentTypeVal'   => array_values(StringHelper::getPaymentTypeList()),
+            'paimentStatusKey' => array_keys(StringHelper::getPaimentStatusList()),
+            'paimentStatusVal' => array_values(StringHelper::getPaimentStatusList()),
         ]);
     }
 }
