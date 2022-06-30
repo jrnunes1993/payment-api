@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\NumberHelper;
+use App\Helpers\StringHelper;
 use App\Models\Charge;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -19,30 +20,46 @@ class ChargeController extends Controller
             }
 
             return DataTables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-                        $btn = '<div class="center"><a href="/charges/form/' . $row->id . '" class="edit btn btn-primary btn-sm">Editar</a></div>';
-                        return $btn;
-                    })
-                    ->addColumn('statusStr', function($row){
-                        $status = $row->getStatusStr();
-                        return $status;
-                    })
-                    ->addColumn('typeStr', function($row){
-                        $type = $row->getTypeStr();
-                        return $type;
-                    })
-                    ->addColumn('studentName', function($row){
-                        $name = $row->student()->name;
-                        return $name;
-                    })
-                    ->addColumn('valueFmt', function($row){
-                        return NumberHelper::formatNumber($row->value);
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $btn = '<div class="center"><a href="/charges/form/' . $row->id . '" class="edit btn btn-primary btn-sm">Editar</a></div>';
+                    return $btn;
+                })
+                ->addColumn('statusStr', function ($row) {
+                    $status = $row->getStatusStr();
+                    return $status;
+                })
+                ->addColumn('typeStr', function ($row) {
+                    $type = $row->getTypeStr();
+                    return $type;
+                })
+                ->addColumn('studentName', function ($row) {
+                    $name = $row->student()->name;
+                    return $name;
+                })
+                ->addColumn('valueFmt', function ($row) {
+                    return NumberHelper::formatNumber($row->value);
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
 
         return view('charges.list');
+    }
+
+    public function view($chargeId)
+    {
+        $charge = Charge::find($chargeId);
+        if ($charge == null) {
+            $charge = new Charge([
+                'studentId' => 1,
+                'status' => 'Pending',
+            ]);
+        }
+        return view('charges.view', [
+            'data'          => $charge,
+            'paimentType'   => StringHelper::getPaymentTypeList(),
+            'paimentStatus' => StringHelper::getPaimentStatusList(),
+        ]);
     }
 }

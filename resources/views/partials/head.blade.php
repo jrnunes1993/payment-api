@@ -1,3 +1,3 @@
 <head>
-  <title>{{$title}} :: Sistema ABC</title>
+    <title>{{$title}} :: Sistema ABC</title>
 </head>

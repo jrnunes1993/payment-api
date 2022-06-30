@@ -19,24 +19,24 @@ class StudentController extends Controller
         if ($request->ajax()) {
             $data = Student::all();
             return DataTables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-                        $btn = '<div class="center"><a href="/students/' . $row->id . '" class="edit btn btn-primary btn-sm">Editar</a></div>';
-                        return $btn;
-                    })
-                    ->addColumn('statusStr', function($row){
-                        $status = $row->getStatusStr();
-                        return $status;
-
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $btn = '<div class="center"><a href="/students/' . $row->id . '" class="edit btn btn-primary btn-sm">Editar</a></div>';
+                    return $btn;
+                })
+                ->addColumn('statusStr', function ($row) {
+                    $status = $row->getStatusStr();
+                    return $status;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
-        
+
         return view('students.list');
     }
 
-    public function view($studentId){
+    public function view($studentId)
+    {
         $student = Student::find($studentId);
         if ($student == null) {
             $student = new Student([
@@ -45,13 +45,14 @@ class StudentController extends Controller
             ]);
         }
         return view('students.view', [
-            'data' => $student, 
-            'states' => CountryStates::getStates(), 
+            'data' => $student,
+            'states' => CountryStates::getStates(),
             'postals' => CountryStates::getPostals()
         ]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         if ($request->id == 0) {
             $data = new Student;
             $message = 'adicionado';
@@ -59,7 +60,7 @@ class StudentController extends Controller
             $data = Student::find($request->id);
             $message = 'atualizado';
         }
-        
+
         $data->name = $request->name;
         $data->email = $request->email;
         $data->status = $request->status;
@@ -77,5 +78,4 @@ class StudentController extends Controller
 
         return redirect('students/' . $data->id)->with('message', "Registro de Estudante $message com sucesso.");
     }
-
 }
