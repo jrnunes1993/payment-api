@@ -34,7 +34,7 @@
               <input type="text" id="name" name="name" maxlength="100" class="form-control" required="true" value="{{$data->name}}">
             </div>
           </div>
-        </div>            
+        </div>
 
         <div class="row">
           <div class="col">
@@ -125,11 +125,12 @@
         <div class="row">
           <div class="col">
             <a href="/students" class="btn btn-warning">Voltar</a>
-          </div>          
+          </div>
           <div class="col" style="text-align: end;">
             <button type="submit" class="btn btn-success">Salvar</button>
           </div>  
         </div>  
+==== BASE ====
       </div>
     </form>
     @if ($data->id > 0)
@@ -139,8 +140,8 @@
       </div>
     @endif
   </div>
-</div>  
-  
+</div>
+
 @endsection
 
 
