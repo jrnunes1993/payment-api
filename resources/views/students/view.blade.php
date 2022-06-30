@@ -128,9 +128,8 @@
           </div>
           <div class="col" style="text-align: end;">
             <button type="submit" class="btn btn-success">Salvar</button>
-          </div>  
-        </div>  
-==== BASE ====
+          </div>
+        </div>
       </div>
     </form>
     @if ($data->id > 0)
