@@ -76,4 +76,22 @@ class ChargeController extends Controller
             'paimentStatusVal' => array_values(StringHelper::getPaimentStatusList()),
         ]);
     }
+
+    public function store(Request $request)
+    {
+        if ($request->id == 0) {
+            $charge = new Charge();
+            $message = 'adicionado';
+        } else {
+            $charge = Charge::find($request->id);
+            $message = 'atualizado';
+        }
+
+        $requestData = $request->all();
+        $requestData['value'] = NumberHelper::formatNumberToDB($requestData['value']);
+        $charge->fill($requestData);
+
+        $charge->save();
+        return redirect('charges/form/' . $charge->id)->with('message', "Registro de Cobrança $message com sucesso.");
+    }
 }

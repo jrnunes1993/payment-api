@@ -114,7 +114,7 @@
 <script >
     $(window).on('ready', function() {
         var dataType = '{{$data->type}}';
-        if(dataType == "bankSlip") {
+        if(dataType == "bankSlip" || dataType == '') {
             $("#btn-post").attr('disabled',false);
             $("#typeHintHelp").hide();
         } else {

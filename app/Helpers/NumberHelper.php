@@ -13,6 +13,12 @@ class NumberHelper
         return number_format($value, 2, ',', '.');
     }
 
+    public static function formatNumberToDB($value)
+    {
+        $dbVal = str_replace('.', '', $value);
+        return str_replace(',', '.', $dbVal);
+    }
+
     public static function formatDate($dateTime)
     {
         if ($dateTime == '') {

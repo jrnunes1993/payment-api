@@ -11,7 +11,15 @@ class Charge extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['studentId', 'status'];
+    protected $fillable = [
+        'studentId',
+        'value',
+        'referenceId',
+        'status',
+        'type',
+        'dueDate',
+        'paidedAt'
+    ];
 
     public function student()
     {
