@@ -30,9 +30,9 @@
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="name">Autenticador</label>
+                        <label for="referenceId">Autenticador</label>
                         <input type="text" id="referenceId" name="referenceId" readonly class="form-control" value="{{$data->referenceId}}">
-                        <small id="emailHelp" class="form-text text-muted">Após o processamento da solicitação a chave de autenticação aparece aqui.</small>
+                        <small id="referenceIdHelp" class="form-text text-muted">Após o processamento da solicitação a chave de autenticação aparece aqui.</small>
                     </div>
                 </div>
             </div>
@@ -40,13 +40,13 @@
             <div class="row">
                 <div class="col-2">
                     <div class="form-group">
-                        <label for="id">Código Estudante</label>
+                        <label for="studentId">Código Estudante</label>
                         <input type="text" id="studentId" name="studentId" class="form-control" readonly value="{{$studentData->id}}">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="name">Nome do Estudante</label>
+                        <label for="studentName">Nome do Estudante</label>
                         <input type="text" id="studentName" name="studentName" readonly class="form-control" value="{{$studentData->name}}">
                     </div>
                 </div>
@@ -55,13 +55,13 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        <label for="id">Valor*</label>
+                        <label for="value">Valor*</label>
                         <input type="text" id="value" name="value" class="form-control" required="true" value="{{$data->getValue()}}">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="name">Data Vencimento*</label>
+                        <label for="dueDate">Data Vencimento*</label>
                         <input type="text" id="dueDate" name="dueDate" required="true" class="form-control" value="{{$data->getDueDate()}}">
                     </div>
                 </div>

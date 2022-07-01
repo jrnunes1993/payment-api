@@ -39,13 +39,13 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        <label for="id">E-Mail*</label>
+                        <label for="email">E-Mail*</label>
                         <input type="email" id="email" name="email" class="form-control" maxlength="50" required="true" value="{{$data->email}}">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="name">Telefone*</label>
+                        <label for="phoneNumber">Telefone*</label>
                         <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" required="true" value="{{$data->phoneNumber}}">
                     </div>
                 </div>
@@ -54,13 +54,13 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        <label for="id">CPF*</label>
+                        <label for="document">CPF*</label>
                         <input type="text" id="document" name="document" class="form-control" maxlength="50" required="true" value="{{$data->document}}">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="name">Situação*</label>
+                        <label for="status">Situação*</label>
                         <select id="status" name="status" class="form-select" aria-label="Informe a Situação">
                             <option value="Registered" {{ $data->status == 'Registered' ? 'selected' : '' }}>Registrado</option>
                             <option value="Locked" {{ $data->status == 'Locked' ? 'selected' : '' }}>Trancado</option>
@@ -73,13 +73,13 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        <label for="id">País*</label>
+                        <label for="country">País*</label>
                         <input type="text" id="country" name="country" class="form-control" maxlength="50" required="true" value="{{$data->country}}">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="id">Estado*</label>
+                        <label for="state">Estado*</label>
                         <select id="state" name="state" class="form-select" aria-label="Informe o Estado">
                             @for ($i = 0; $i < 27; $i++)
                                 <option value="{{$postals[$i]}}" {{ $data->state == $postals[$i] ? 'selected' : '' }}>{{ $states[$i] }}</option>
@@ -89,13 +89,13 @@
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="name">Cidade*</label>
+                        <label for="city">Cidade*</label>
                         <input type="text" id="city" name="city" class="form-control" required="true" value="{{$data->city}}">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="name">Bairro*</label>
+                        <label for="locality">Bairro*</label>
                         <input type="text" id="locality" name="locality" class="form-control" required="true" value="{{$data->locality}}">
                     </div>
                 </div>
@@ -104,19 +104,19 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        <label for="name">Logradouro*</label>
+                        <label for="street">Logradouro*</label>
                         <input type="text" id="street" name="street" class="form-control" maxlength="50" required="true" value="{{$data->street}}">
                     </div>
                 </div>
                 <div class="col-2">
                     <div class="form-group">
-                        <label for="name">Número*</label>
+                        <label for="number">Número*</label>
                         <input type="number" id="number" name="number" class="form-control" required="true" value="{{$data->number}}">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="name">CEP*</label>
+                        <label for="postalCode">CEP*</label>
                         <input type="text" id="postalCode" name="postalCode" class="form-control" maxlength="50" required="true" value="{{$data->postalCode}}">
                     </div>
                 </div>
