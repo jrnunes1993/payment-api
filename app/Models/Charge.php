@@ -23,7 +23,6 @@ class Charge extends Model
 
     public function student()
     {
-        //return $this->hasOne(Student::class);
         return Student::find($this->studentId);
     }
 

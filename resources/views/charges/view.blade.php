@@ -114,12 +114,23 @@
 <script >
     $(window).on('ready', function() {
         var dataType = '{{$data->type}}';
+        var studentId = '{{$data->studentId}}';
         if(dataType == "bankSlip" || dataType == '') {
             $("#btn-post").attr('disabled',false);
             $("#typeHintHelp").hide();
         } else {
             $("#btn-post").attr('disabled',true)
             $("#typeHintHelp").show();
+        }
+
+        if (studentId == '0') {
+            $("#studentName").prop('readonly', false);
+            $('#studentName').select2({
+                ajax: {
+                    url: '/api/students/ajaxlist',
+                    dataType: 'json'
+                }
+            });
         }
     });
 

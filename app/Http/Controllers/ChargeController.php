@@ -59,7 +59,7 @@ class ChargeController extends Controller
         $charge = Charge::find($chargeId);
         if ($charge == null) {
             $charge = new Charge([
-                'studentId' => 1,
+                'studentId' => 0,
                 'status' => 'Pending',
             ]);
             $student = new Student();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\CountryStates;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 
 class StudentController extends Controller
@@ -77,5 +78,30 @@ class StudentController extends Controller
         $data->save();
 
         return redirect('students/' . $data->id)->with('message', "Registro de Estudante $message com sucesso.");
+    }
+
+    public function ajaxList(Request $request) {
+        $arr = [];
+        $term = $request->query('term');
+        if ($term != NULL) {
+            $list = DB::table('students')
+                ->select('id', 'name')
+                ->where('name', 'like', '%' . $term . '%')
+                ->orWhere('id', $term)
+                ->orderBy('name', 'asc')
+                ->get();
+
+            foreach ($list as $student) {
+                $arr[] = [
+                    'id'   => $student->id,
+                    'text' => $student->name
+                ];
+            }
+
+            $arr = [
+                'results' => $arr
+            ];
+        }
+        return json_encode($arr);
     }
 }
