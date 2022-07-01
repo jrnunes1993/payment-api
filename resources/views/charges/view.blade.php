@@ -77,7 +77,7 @@
                 <div class="col">
                     <div class="form-group">
                         <label for="status">Status*</label>
-                        <select id="status" name="status" class="form-select" aria-label="Informe o Status">
+                        <select id="status" name="status" class="form-select select-type" aria-label="Informe o Status">
                             @for ($i = 0; $i < 3; $i++)
                                 <option value="{{$paimentStatusKey[$i]}}" {{ $data->status == $paimentStatusKey[$i] ? 'selected' : '' }}>{{ $paimentStatusVal[$i] }}</option>
                             @endfor
@@ -87,11 +87,14 @@
                 <div class="col">
                     <div class="form-group">
                         <label for="type">Forma de Pagamento*</label>
-                        <select id="type" name="type" class="form-select" aria-label="Informe o Status">
+                        <select id="type" name="type" class="form-select" aria-label="Informe o Tipo de Cobrança">
                             @for ($i = 0; $i < 3; $i++)
                                 <option value="{{$paimentTypeKey[$i]}}" {{ $data->type == $paimentTypeKey[$i] ? 'selected' : '' }}>{{ $paimentTypeVal[$i] }}</option>
                             @endfor
                         </select>
+                        <small id="typeHintHelp" class="form-text text-muted" style="color: #f5c6cb!important;display: none">
+                            Não é possível gerar cobrança com cartão neste momento.
+                        </small>
                     </div>
                 </div>
             </div>
@@ -101,11 +104,35 @@
                     <a href="/charges" class="btn btn-warning">Voltar</a>
                 </div>
                 <div class="col" style="text-align: end;">
-                    <button type="submit" class="btn btn-success">Salvar</button>
+                    <button type="submit" class="btn btn-success" id="btn-post">Salvar</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
+
+<script >
+    $(window).on('ready', function() {
+        var dataType = '{{$data->type}}';
+        if(dataType == "bankSlip") {
+            $("#btn-post").attr('disabled',false);
+            $("#typeHintHelp").hide();
+        } else {
+            $("#btn-post").attr('disabled',true)
+            $("#typeHintHelp").show();
+        }
+    });
+
+    $("#type").on('change',function(){
+        var selection = $(this).find('option:selected').text();
+        if(selection == "Boleto") {
+            $("#btn-post").attr('disabled',false);
+            $("#typeHintHelp").hide();
+        } else {
+            $("#btn-post").attr('disabled',true)
+            $("#typeHintHelp").show();
+        }
+    });
+</script>
 
 @endsection

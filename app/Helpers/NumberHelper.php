@@ -15,6 +15,10 @@ class NumberHelper
 
     public static function formatDate($dateTime)
     {
+        if ($dateTime == '') {
+            return $dateTime;
+        }
+
         $dateObj = DateTime::createFromFormat('Y-m-d H:i:s', $dateTime);
         $strDate = $dateObj->format('Y-m-d');
 
