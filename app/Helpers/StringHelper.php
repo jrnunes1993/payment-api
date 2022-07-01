@@ -21,9 +21,9 @@ class StringHelper
     public static function getPaymentTypeList()
     {
         return [
+            'bankSlip'   => 'Boleto',
             'creditCard' => 'Cartão Crédito',
-            'debitCard'  => 'Cartão Débito',
-            'bankSlip'   => 'Boleto'
+            'debitCard'  => 'Cartão Débito'
         ];
     }
 
