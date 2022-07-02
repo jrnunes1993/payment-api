@@ -37,6 +37,15 @@
         .fix-responsible {
             width: 100% !important;
         }
+        .select2-selection {
+            height: calc(2.25rem + 2px) !important;
+        }
+        .select2-selection__arrow {
+            top: 20% !important;
+        }
+        .select2-selection__rendered {
+            line-height: 35px !important;
+        }
     </style>
 
 </head>

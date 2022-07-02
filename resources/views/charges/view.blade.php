@@ -46,8 +46,13 @@
                 </div>
                 <div class="col">
                     <div class="form-group">
+                        @if ($data->studentId == 0)
                         <label for="studentName">Nome do Estudante</label>
-                        <input type="text" id="studentName" name="studentName" readonly class="form-control" value="{{$studentData->name}}">
+                        <select id="studentName" name="studentName" class="form-select select-type fix-select2-height" aria-label="Informe o Estudante"></select>
+                        @else
+                        <label for="studentNameInput">Nome do Estudante</label>
+                        <input type="text" id="studentNameInput" name="studentNameInput" readonly class="form-control" value="{{$studentData->name}}">
+                        @endif
                     </div>
                 </div>
             </div>
@@ -144,6 +149,12 @@
             $("#typeHintHelp").show();
         }
     });
+
+    $("#studentName").on('change',function(){
+        var selection = $(this).find('option:selected').val();
+        $("#studentId").val(selection);
+    });
+
 </script>
 
 @endsection

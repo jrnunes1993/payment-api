@@ -92,6 +92,9 @@ class ChargeController extends Controller
         $charge->fill($requestData);
 
         $charge->save();
+
+// call api PagSeguro
+
         return redirect('charges/form/' . $charge->id)->with('message', "Registro de Cobrança $message com sucesso.");
     }
 }
