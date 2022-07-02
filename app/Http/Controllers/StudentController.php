@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\CountryStates;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 
 class StudentController extends Controller
@@ -19,40 +20,40 @@ class StudentController extends Controller
         if ($request->ajax()) {
             $data = Student::all();
             return DataTables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-                        $btn = '<div class="center"><a href="/students/' . $row->id . '" class="edit btn btn-primary btn-sm">Editar</a></div>';
-                        return $btn;
-                    })
-                    ->addColumn('statusStr', function($row){
-                        $status = $row->getStatusStr();
-                        return $status;
-
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $btn = '<div class="center"><a href="/students/' . $row->id . '" class="edit btn btn-primary btn-sm">Editar</a></div>';
+                    return $btn;
+                })
+                ->addColumn('statusStr', function ($row) {
+                    $status = $row->getStatusStr();
+                    return $status;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
-        
+
         return view('students.list');
     }
 
-    public function view($id){
-        $student = Student::find($id);
+    public function view($studentId)
+    {
+        $student = Student::find($studentId);
         if ($student == null) {
             $student = new Student([
                 'state' => 'RS',
                 'country' => 'Brasil',
-                ''
             ]);
         }
         return view('students.view', [
-            'data' => $student, 
-            'states' => CountryStates::getStates(), 
+            'data' => $student,
+            'states' => CountryStates::getStates(),
             'postals' => CountryStates::getPostals()
         ]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         if ($request->id == 0) {
             $data = new Student;
             $message = 'adicionado';
@@ -60,7 +61,7 @@ class StudentController extends Controller
             $data = Student::find($request->id);
             $message = 'atualizado';
         }
-        
+
         $data->name = $request->name;
         $data->email = $request->email;
         $data->status = $request->status;
@@ -79,4 +80,28 @@ class StudentController extends Controller
         return redirect('students/' . $data->id)->with('message', "Registro de Estudante $message com sucesso.");
     }
 
+    public function ajaxList(Request $request) {
+        $arr = [];
+        $term = $request->query('term');
+        if ($term != NULL) {
+            $list = DB::table('students')
+                ->select('id', 'name')
+                ->where('name', 'like', '%' . $term . '%')
+                ->orWhere('id', $term)
+                ->orderBy('name', 'asc')
+                ->get();
+
+            foreach ($list as $student) {
+                $arr[] = [
+                    'id'   => $student->id,
+                    'text' => $student->name
+                ];
+            }
+
+            $arr = [
+                'results' => $arr
+            ];
+        }
+        return json_encode($arr);
+    }
 }

@@ -3,8 +3,7 @@
 @include('partials.head', ['title' => 'Home'])
 
 @section('content')
-  <div>
+<div>
     <a href="/students">Cadastro de Estudantes</a>
-    
-  </div>  
+</div>
 @endsection

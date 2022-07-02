@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChargeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
@@ -24,10 +25,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainController::class, 'index']);
 
-// Route::get('/', function () {
-//     echo 'Versão Laravel: ' . app()->version();
-// });
-
 Route::get('students', [StudentController::class, 'index'])->name('student.index');
-Route::get('students/{post}', [StudentController::class, 'view']);
+Route::get('students/{studentId}', [StudentController::class, 'view']);
 Route::post('students/store', [StudentController::class, 'store']);
+
+Route::get('charges', [ChargeController::class, 'index'])->name('charge.index');
+Route::get('charges/{studentId}', [ChargeController::class, 'index'])->name('charge.datatable');
+Route::get('charges/form/{chargeId}', [ChargeController::class, 'view']);
+Route::post('charges/form/store', [ChargeController::class, 'store']);

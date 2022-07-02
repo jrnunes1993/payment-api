@@ -10,7 +10,10 @@ docker-compose up -d
 php artisan db:seed
 ```
 
-php artisan db:seed => Vai gerar 2 registros para a tabela User e 33 para a tabela Students
+php artisan db:seed 
+ - Gera 2 registros para a tabela User
+ - Gera 33 registros para a tabela Students
+ - Gera 50 registros para a tabela Charges
 
 API PagSeguro
   https://dev.pagseguro.uol.com.br/reference/pagseguro-reference-intro

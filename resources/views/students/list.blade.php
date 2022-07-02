@@ -1,54 +1,50 @@
 @extends('layouts.app')
 
 @php
-  $title = "Lista de Estudantes";
+$title = "Lista de Estudantes";
 @endphp
 
 @include('partials.head', ['title' => $title])
 
 @section('content')
-  <div>
+<div>
     <h3>{{$title}}</h3>
-    <table class="table table-bordered data-table">
-      <thead>
-        <tr>
-          <th>Código</th>
-          <th>Nome</th>
-          <th>E-Mail</th>
-          <th>Situação</th>
-          <th>
-            <div class="center">
-              <a href="/students/0" class="edit btn btn-primary btn-sm">Novo</a>
-            </div>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
+    <table class="fix-responsible table table-bordered data-table">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>E-Mail</th>
+                <th>Situação</th>
+                <th>
+                    <div class="center">
+                        <a href="/students/0" class="edit btn btn-success btn-sm">Novo</a>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
     </table>
-  </div>
+</div>
 
-  <script type="text/javascript">
-  $(function () {    
-    var table = $('.data-table').DataTable({
-        // processing: true,
-        serverSide: true,
-        language: {
-            "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
-        },
-        ajax: "{{ route('student.index') }}",
-        columns: [
-            {data: 'id', name: 'id'},
-            {data: 'name', name: 'name'},
-            {data: 'email', name: 'email'},
-            {data: 'statusStr', name: 'statusStr'},
-            {data: 'action', name: 'action', orderable: false, searchable: false},
-        ]
+<script type="text/javascript">
+    $(function() {
+        var table = $('.data-table').DataTable({
+            serverSide: true,
+            language: {
+                "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json"
+            },
+            ajax: "{{ route('student.index') }}",
+            columns: [
+                {data: 'id', name: 'id'},
+                {data: 'name', name: 'name'},
+                {data: 'email', name: 'email'},
+                {data: 'statusStr', name: 'statusStr'},
+                {data: 'action', name: 'action', orderable: false, searchable: false},
+            ]
+        });
     });
-  });
 </script>
-  
+
 @endsection
-
-
-
