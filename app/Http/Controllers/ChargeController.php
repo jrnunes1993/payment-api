@@ -6,6 +6,7 @@ use App\Helpers\NumberHelper;
 use App\Helpers\StringHelper;
 use App\Models\Charge;
 use App\Models\Student;
+use Exception;
 use Illuminate\Http\Request;
 use PagSeguro\Configuration\Configure;
 use PagSeguro\Domains\Requests\DirectPayment\Boleto;
@@ -82,7 +83,8 @@ class ChargeController extends Controller
 
     public function store(Request $request)
     {
-        $this->gerarBoletoApi(Student::find($request->studentId), $request->value);
+        $value = NumberHelper::formatNumberToDB($request->value);
+        $this->gerarBoletoApi(Student::find($request->studentId), $value);
         if ($request->id == 0) {
             $charge = new Charge();
             $message = 'adicionado';
@@ -92,7 +94,7 @@ class ChargeController extends Controller
         }
 
         $requestData = $request->all();
-        $requestData['value'] = NumberHelper::formatNumberToDB($requestData['value']);
+        $requestData['value'] = $value;
         $charge->fill($requestData);
 
         $charge->save();
@@ -163,7 +165,8 @@ class ChargeController extends Controller
             echo "<pre>";
             dd($result);
         } catch (Exception $e) {
-            echo "</br> <strong>";
+            echo "</br>Erro registrando cobrança:</br><strong>";
+            // var_dump(json_encode($e->getTrace())); die;
             die($e->getMessage());
         }
     }
