@@ -7,6 +7,9 @@ use App\Helpers\StringHelper;
 use App\Models\Charge;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use PagSeguro\Configuration\Configure;
+use PagSeguro\Domains\Requests\DirectPayment\Boleto;
+use PagSeguro\Library;
 use Yajra\DataTables\DataTables;
 
 class ChargeController extends Controller
@@ -79,7 +82,7 @@ class ChargeController extends Controller
 
     public function store(Request $request)
     {
-        $this->criarCobranca();
+        $this->gerarBoletoApi(Student::find($request->studentId), $request->value);
         if ($request->id == 0) {
             $charge = new Charge();
             $message = 'adicionado';
@@ -99,44 +102,36 @@ class ChargeController extends Controller
         return redirect('charges/form/' . $charge->id)->with('message', "Registro de Cobrança $message com sucesso.");
     }
 
-    private function criarCobranca()
+    private function gerarBoletoApi(Student $student, $valor)
     {
-        \PagSeguro\Library::initialize();
-        \PagSeguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
-        \PagSeguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
+        Library::initialize();
+        Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
+        Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
 
-//Instantiate a new Boleto Object
-        $boleto = new \PagSeguro\Domains\Requests\DirectPayment\Boleto();
+        $boleto = new Boleto();
 
-// Set the Payment Mode for this payment request
         $boleto->setMode('DEFAULT');
 
         /**
          * @todo Change the receiver Email
          */
-//$boleto->setReceiverEmail('vendedor@lojamodelo.com.br');
+        //$boleto->setReceiverEmail('vendedor@lojamodelo.com.br');
 
-// Set the currency
         $boleto->setCurrency("BRL");
 
-// Add an item for this payment request
         $boleto->addItems()->withParameters(
             '0001',
             'Mensalidade do Curso',
-            2,
-            130.00
+            1,
+            $valor
         );
 
 
-// Set a reference code for this payment request. It is useful to identify this payment
-// in future notifications.
         $boleto->setReference("LIBPHP000001-boleto");
 
 
-// Set your customer information.
-// If you using SANDBOX you must use an email @sandbox.pagseguro.com.br
-        $boleto->setSender()->setName('João Comprador');
-        $boleto->setSender()->setEmail('email@comprador.com.br');
+        $boleto->setSender()->setName($student->name);
+        $boleto->setSender()->setEmail($student->email);
 
         $boleto->setSender()->setPhone()->withParameters(
             11,
@@ -148,34 +143,25 @@ class ChargeController extends Controller
             '85269743000'
         );
 
-//        $boleto->setSender()->setHash('3dc25e8a7cb3fd3104e77ae5ad0e7df04621caa33e300b27aeeb9ea1adf1a24f');
-//
-//        $boleto->setSender()->setIp('127.0.0.0');
-
-// Set shipping information for this payment request
         $boleto->setShipping()->setAddress()->withParameters(
-            'Av. Brig. Faria Lima',
-            '1384',
-            'Jardim Paulistano',
-            '01452002',
-            'São Paulo',
-            'SP',
+            $student->street,
+            $student->number,
+            $student->locality,
+            $student->postalCode,
+            $student->city,
+            $student->state,
             'BRA',
-            'apto. 114'
+            ''
         );
 
-// If your payment request don't need shipping information use:
-// $boleto->setShipping()->setAddressRequired()->withParameters('FALSE');
 
         try {
-            //Get the crendentials and register the boleto payment
             $result = $boleto->register(
-                \PagSeguro\Configuration\Configure::getAccountCredentials()
+                Configure::getAccountCredentials()
             );
 
-            // You can use methods like getCode() to get the transaction code and getPaymentLink() for the Payment's URL.
             echo "<pre>";
-            print_r($result);
+            dd($result);
         } catch (Exception $e) {
             echo "</br> <strong>";
             die($e->getMessage());
