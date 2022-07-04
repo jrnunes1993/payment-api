@@ -67,13 +67,13 @@
                 <div class="col">
                     <div class="form-group">
                         <label for="dueDate">Data Vencimento*</label>
-                        <input type="text" id="dueDate" name="dueDate" required="true" class="form-control" value="{{$data->getDueDate()}}">
+                        <input type="date" id="dueDate" name="dueDate" required="true" class="form-control" value="{{$data->getDueDate()}}">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
                         <label for="paidedAt">Data Pagamento</label>
-                        <input type="text" id="paidedAt" name="paidedAt" class="form-control" value="{{$data->getPaidedAt()}}">
+                        <input type="datetime-local" id="paidedAt" name="paidedAt" class="form-control" value="{{$data->getPaidedAt()}}">
                     </div>
                 </div>
             </div>

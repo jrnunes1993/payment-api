@@ -82,7 +82,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="/charges">Listar Cobranças</a></li>
-                                <li><a class="dropdown-item" href="#">Nova Cobrança</a></li>
+                                <li><a class="dropdown-item" href="">Nova Cobrança</a></li>
                             </ul>
                         </li>
                     </ul>
