@@ -95,7 +95,7 @@ class ChargeController extends Controller
         try {
             $resultPostCriaBoleto = $this->gerarBoletoApi(Student::find($request->studentId), $value);
         } catch (Exception $e) {
-            return redirect('charges/form/' . $request->id)
+            return redirect('charges/form/' . (int) $request->id)
                 ->with('message', "Erro registrando cobrança: " . $e->getMessage())
                 ->with('messageType', "alert-danger");
         }
