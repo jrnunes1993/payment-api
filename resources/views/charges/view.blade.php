@@ -11,8 +11,8 @@
 <div>
     <h3>{{$title}}</h3>
     @if( session('message') )
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('message') }}
+    <div class="alert {{session('messageType')}} alert-dismissible fade show" role="alert">
+        {!! session('message') !!}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -105,7 +105,7 @@
                 @if ($data->paymentLink)
                 <div class="row">
                     <div class="col">
-                        <label for="paymentLinkView">Acesse o pagamento clicando
+                        <label for="paymentLinkView">Acessar cobrança on-line
                             <a href="{{$data->paymentLink}}" target="_blank" class="btn btn-link" style="padding-left: 2px;">
                                 aqui
                             </a>

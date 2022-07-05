@@ -15,6 +15,7 @@
                 <th>Valor</th>
                 <th>Status</th>
                 <th>Tipo</th>
+                <th>&nbsp;</th>
                 <th>
                     <div class="center">
                         <a href="/charges/form/0" class="edit btn btn-success btn-sm">Novo</a>
@@ -39,6 +40,7 @@
             {data: 'valueFmt', name: 'valueFmt', type: 'num-fmt'},
             {data: 'statusStr', name: 'statusStr'},
             {data: 'typeStr', name: 'typeStr'},
+            {data: 'link', name: 'link', orderable: false, searchable: false},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ];
 

@@ -30,6 +30,14 @@ class ChargeController extends Controller
                     $btn = '<div class="center"><a href="/charges/form/' . $row->id . '" class="edit btn btn-primary btn-sm">Editar</a></div>';
                     return $btn;
                 })
+                ->addColumn('link', function ($row) {
+                    if ($row->paymentLink != '') {
+                        $link = '<div class="center"><a href="' . $row->paymentLink . '" target="_blank" class="edit btn btn-primary btn-sm">Ver</a></div>';
+                    } else {
+                        $link = '<div class="center"></div>';
+                    }
+                    return $link;
+                })
                 ->addColumn('statusStr', function ($row) {
                     $status = $row->getStatusStr();
                     return $status;
@@ -51,7 +59,7 @@ class ChargeController extends Controller
                 ->addColumn('paidedAtFmt', function ($row) {
                     return $row->getPaidedAt();
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['action','link'])
                 ->make(true);
         }
 
@@ -84,7 +92,14 @@ class ChargeController extends Controller
     public function store(Request $request)
     {
         $value = NumberHelper::formatNumberToDB($request->value);
-        $resultPostCriaBoleto = $this->gerarBoletoApi(Student::find($request->studentId), $value);
+        try {
+            $resultPostCriaBoleto = $this->gerarBoletoApi(Student::find($request->studentId), $value);
+        } catch (Exception $e) {
+            return redirect('charges/form/' . $request->id)
+                ->with('message', "Erro registrando cobrança: " . $e->getMessage())
+                ->with('messageType', "alert-danger");
+        }
+
         if ($request->id == 0) {
             $charge = new Charge();
             $message = 'adicionado';
@@ -101,7 +116,9 @@ class ChargeController extends Controller
 
         $charge->save();
 
-        return redirect('charges/form/' . $charge->id)->with('message', "Registro de Cobrança $message com sucesso.");
+        return redirect('charges/form/' . $charge->id)
+            ->with('message', "Registro de Cobrança $message com sucesso.")
+            ->with('messageType', "alert-success");
     }
 
     /**
@@ -162,15 +179,15 @@ class ChargeController extends Controller
         );
 
 
-        try {
-            $result = $boleto->register(
-                Configure::getAccountCredentials()
-            );
-            return (Object) $result;
-        } catch (Exception $e) {
-            echo "</br>Erro registrando cobrança:</br><strong>";
-            // var_dump(json_encode($e->getTrace())); die;
-            die($e->getMessage());
-        }
+        // try {
+        $result = $boleto->register(
+            Configure::getAccountCredentials()
+        );
+        return (Object) $result;
+        // } catch (Exception $e) {
+        //     echo "</br>Erro registrando cobrança:</br><strong>";
+        //     // var_dump(json_encode($e->getTrace())); die;
+        //     die($e->getMessage());
+        // }
     }
 }
