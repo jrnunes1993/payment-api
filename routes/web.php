@@ -33,3 +33,6 @@ Route::get('charges', [ChargeController::class, 'index'])->name('charge.index');
 Route::get('charges/{studentId}', [ChargeController::class, 'index'])->name('charge.datatable');
 Route::get('charges/form/{chargeId}', [ChargeController::class, 'view']);
 Route::post('charges/form/store', [ChargeController::class, 'store']);
+Route::get('/teste', function(){
+
+});

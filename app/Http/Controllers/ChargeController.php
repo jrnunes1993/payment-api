@@ -84,7 +84,7 @@ class ChargeController extends Controller
     public function store(Request $request)
     {
         $value = NumberHelper::formatNumberToDB($request->value);
-        $this->gerarBoletoApi(Student::find($request->studentId), $value);
+        $resultPostCriaBoleto = $this->gerarBoletoApi(Student::find($request->studentId), $value);
         if ($request->id == 0) {
             $charge = new Charge();
             $message = 'adicionado';
@@ -96,14 +96,19 @@ class ChargeController extends Controller
         $requestData = $request->all();
         $requestData['value'] = $value;
         $charge->fill($requestData);
+        $charge->paymentLink = $resultPostCriaBoleto->getPaymentLink();
+        $charge->referenceId = $resultPostCriaBoleto->getCode();
 
         $charge->save();
-
-
 
         return redirect('charges/form/' . $charge->id)->with('message', "Registro de Cobrança $message com sucesso.");
     }
 
+    /**
+     * @param Student $student
+     * @param $valor
+     * @throws Exception
+     */
     private function gerarBoletoApi(Student $student, $valor)
     {
         Library::initialize();
@@ -161,9 +166,7 @@ class ChargeController extends Controller
             $result = $boleto->register(
                 Configure::getAccountCredentials()
             );
-
-            echo "<pre>";
-            dd($result);
+            return $result;
         } catch (Exception $e) {
             echo "</br>Erro registrando cobrança:</br><strong>";
             // var_dump(json_encode($e->getTrace())); die;
