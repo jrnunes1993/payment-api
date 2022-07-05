@@ -18,7 +18,7 @@
         </button>
     </div>
     @endif
-    <form name="charge-view-form" id="charge-view-form" method="post" action="store">
+    <form name="charge-view-form" id="charge-view-form" method="post" action="store" onsubmit="btnPost.disabled = true; return true;">
         @csrf
         <div class="container">
             <div class="row">
@@ -102,6 +102,28 @@
                         </small>
                     </div>
                 </div>
+                @if ($data->paymentLink)
+                <div class="row">
+                    <div class="col">
+                        <label for="paymentLinkView">Acesse o pagamento clicando
+                            <a href="{{$data->paymentLink}}" target="_blank" class="btn btn-link" style="padding-left: 2px;">
+                                aqui
+                            </a>
+                        </label>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 10px;">
+                    <div class="col">
+                        <small>
+                            Ou copie e cole o endereço abaixo:
+                        </small>
+                        <br/>
+                        <code>
+                            {{$data->paymentLink}}
+                        </code>
+                    </div>
+                </div>
+                @endif
             </div>
 
             <div class="row">
@@ -109,7 +131,10 @@
                     <a href="/charges" class="btn btn-warning">Voltar</a>
                 </div>
                 <div class="col" style="text-align: end;">
-                    <button type="submit" class="btn btn-success" id="btn-post">Salvar</button>
+                    <button type="submit" class="btn btn-success" id="btn-post" name="btnPost">
+                        <span id="submitSpin" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Salvar
+                    </button>
                 </div>
             </div>
         </div>
@@ -130,13 +155,14 @@
 
         if (studentId == '0') {
             $("#studentName").prop('readonly', false);
-            $('#studentName').select2({
+            $("#studentName").select2({
                 ajax: {
                     url: '/api/students/ajaxlist',
                     dataType: 'json'
                 }
             });
         }
+        $("#submitSpin").hide();
     });
 
     $("#type").on('change',function(){
@@ -153,6 +179,10 @@
     $("#studentName").on('change',function(){
         var selection = $(this).find('option:selected').val();
         $("#studentId").val(selection);
+    });
+
+    $(window).on('submit', function() {
+        $("#submitSpin").show();
     });
 
 </script>

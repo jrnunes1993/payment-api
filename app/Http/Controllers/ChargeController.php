@@ -166,7 +166,7 @@ class ChargeController extends Controller
             $result = $boleto->register(
                 Configure::getAccountCredentials()
             );
-            return $result;
+            return (Object) $result;
         } catch (Exception $e) {
             echo "</br>Erro registrando cobrança:</br><strong>";
             // var_dump(json_encode($e->getTrace())); die;
