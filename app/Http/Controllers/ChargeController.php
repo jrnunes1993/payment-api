@@ -150,9 +150,7 @@ class ChargeController extends Controller
             $valor
         );
 
-
         $boleto->setReference("LIBPHP000001-boleto");
-
 
         $boleto->setSender()->setName($student->name);
         $boleto->setSender()->setEmail($student->email);
@@ -164,7 +162,8 @@ class ChargeController extends Controller
 
         $boleto->setSender()->setDocument()->withParameters(
             'CPF',
-            '85269743000'
+            $student->document
+            //'85269743000'
         );
 
         $boleto->setShipping()->setAddress()->withParameters(
@@ -178,16 +177,9 @@ class ChargeController extends Controller
             ''
         );
 
-
-        // try {
         $result = $boleto->register(
             Configure::getAccountCredentials()
         );
         return (Object) $result;
-        // } catch (Exception $e) {
-        //     echo "</br>Erro registrando cobrança:</br><strong>";
-        //     // var_dump(json_encode($e->getTrace())); die;
-        //     die($e->getMessage());
-        // }
     }
 }

@@ -73,7 +73,7 @@
                 <div class="col">
                     <div class="form-group">
                         <label for="paidedAt">Data Pagamento</label>
-                        <input type="datetime-local" id="paidedAt" name="paidedAt" class="form-control" value="{{$data->getPaidedAt()}}">
+                        <input type="date" id="paidedAt" name="paidedAt" class="form-control" value="{{$data->getPaidedAt()}}">
                     </div>
                 </div>
             </div>
