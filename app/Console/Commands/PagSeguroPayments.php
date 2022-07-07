@@ -6,6 +6,7 @@ use App\Models\Charge;
 use Illuminate\Console\Command;
 use PagSeguro\Configuration\Configure;
 use PagSeguro\Services\Transactions\Search\Code;
+use App\Helpers\NumberHelper;
 
 class PagSeguroPayments extends Command
 {
@@ -57,7 +58,7 @@ class PagSeguroPayments extends Command
 
                 if($response->getStatus() == 3){
                     $charge->status = 'Paid';
-                    $charge->paidedAt = now();
+                    $charge->paidedAt = NumberHelper::formatDate(new \DateTime());
                     $charge->save();
                 }
 
