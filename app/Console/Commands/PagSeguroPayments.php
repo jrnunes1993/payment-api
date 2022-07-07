@@ -57,6 +57,7 @@ class PagSeguroPayments extends Command
 
                 if($response->getStatus() == 3){
                     $charge->status = 'Paid';
+                    $charge->paidedAt = now();
                     $charge->save();
                 }
 
