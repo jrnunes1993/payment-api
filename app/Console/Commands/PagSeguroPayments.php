@@ -58,7 +58,7 @@ class PagSeguroPayments extends Command
 
                 if($response->getStatus() == 3){
                     $charge->status = 'Paid';
-                    $charge->paidedAt = NumberHelper::formatDate(new \DateTime());
+                    $charge->paidedAt = Date('Y-m-d');
                     $charge->save();
                 }
 
