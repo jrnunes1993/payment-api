@@ -7,7 +7,6 @@ git clone git@github.com:jrnunes1993/payment-api.git
 cd payment-api
 cp .env.example .env
 docker-compose up -d
-php artisan db:seed
 ```
 
 php artisan db:seed 
